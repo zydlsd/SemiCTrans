@@ -1,6 +1,6 @@
 ﻿# SemiCTrans
 
-by Yudan Zhou,
+This is the officail code for "SemiCTrans：Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model with pixel-level contrastive learning".
 
 
 # Introduction
