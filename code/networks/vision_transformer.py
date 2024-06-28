@@ -68,7 +68,7 @@ class SwinUnet(nn.Module):
                         print("delete key:{}".format(k))
                         del pretrained_dict[k]
                 msg = self.swin_unet.load_state_dict(pretrained_dict, strict=False)
-                # print(msg)
+    
                 return
             pretrained_dict = pretrained_dict['model']
             print("---start load pretrained modle of swin encoder---")
@@ -87,6 +87,6 @@ class SwinUnet(nn.Module):
                         del full_dict[k]
 
             msg = self.swin_unet.load_state_dict(full_dict, strict=False)
-            # print(msg)
+    
         else:
             print("none pretrain")
