@@ -1,9 +1,5 @@
 #! /usr/bin/env python
 # -*- encoding: utf-8 -*-
-# @File   :  unet.py
-# @Time   :  2023/09/29 15:22:29
-# @Author :  zyd
-
 
 """
 The implementation is borrowed from: https://github.com/HiLab-git/PyMIC
