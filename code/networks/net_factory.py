@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-'''
-@File   :  net_factory.py
-@Time   :  2023/09/29 15:03:50
-@Author :  zyd
-'''
+
 # 2d
 from DCSS.src.utils.net_utils.unet2d import UNet
 from DCSS.src.utils.net_utils.class_contra_net import ClassContra2DNet
