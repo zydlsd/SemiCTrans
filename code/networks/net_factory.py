@@ -19,7 +19,6 @@ def net_factory_2d(net_type, in_chns=4, class_num=4, up_type=0):
         net = UNet(in_chns=in_chns, class_num=class_num, up_type=up_type)
 
     elif net_type == "class_contra_net":
-        # output: [class_vector, project_head for Contrastive Learning]
         net = ClassContra2DNet(class_num=class_num)
         
     else:

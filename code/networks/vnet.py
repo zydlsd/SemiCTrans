@@ -183,7 +183,7 @@ class VNet(nn.Module):
         self.out_conv = nn.Conv3d(n_filters, n_classes, 1, padding=0)
 
         self.dropout = nn.Dropout3d(p=0.5, inplace=False)
-        # self.__init_weight()
+
 
     def encoder(self, input):
         x1 = self.block_one(input)
@@ -199,7 +199,7 @@ class VNet(nn.Module):
         x4_dw = self.block_four_dw(x4)
 
         x5 = self.block_five(x4_dw)
-        # x5 = F.dropout3d(x5, p=0.5, training=True)
+   
         if self.has_dropout:
             x5 = self.dropout(x5)
 
@@ -229,7 +229,7 @@ class VNet(nn.Module):
         x8_up = self.block_eight_up(x8)
         x8_up = x8_up + x1
         x9 = self.block_nine(x8_up)
-        # x9 = F.dropout3d(x9, p=0.5, training=True)
+
         if self.has_dropout:
             x9 = self.dropout(x9)
         out = self.out_conv(x9)
@@ -245,31 +245,3 @@ class VNet(nn.Module):
             self.has_dropout = has_dropout
         return out
 
-    # def __init_weight(self):
-    #     for m in self.modules():
-    #         if isinstance(m, nn.Conv3d):
-    #             torch.nn.init.kaiming_normal_(m.weight)
-    #         elif isinstance(m, nn.BatchNorm3d):
-    #             m.weight.data.fill_(1)
-    #             m.bias.data.zero_()
-
-
-if __name__ == '__main__':
-    # compute FLOPS & PARAMETERS查看模型计算量和参数量
-    from thop import profile
-    from thop import clever_format
-    """
-    flops通常代表的是浮点运算数，衡量的是算法或者模型的复杂度，计算量小代表计算过程中需要的计算空间较小
-    参数量就是指模型各个部分的参数数量之和，参数小指模型的参数少，比较轻量级
-    但是两者并不是并行的，意思就是计算量小不代表参数量小，参数量小也不代表计算量就少，所以我们要两者结合在一起判断。
-    FLOPS(Floating Point Operations Per Second)：每秒浮点运算次数，是一个衡量硬件速度的指标，用来衡量模型计算复杂度，常用来做神经网络模型速度的间接衡量标准
-    MACs(Multiply–Accumulate Operations):乘加累积操作数，常常被人们与FLOPs概念混淆实际上1MACs包含一个乘法操作与一个加法操作，大约包含2FLOPs。通常MACs与FLOPs存在一个2倍的关系
-    """
-    model = VNet(n_channels=4, n_classes=4, n_filters=16, normalization='batchnorm', has_dropout=True, has_residual=False)
-
-    input = torch.randn(1, 4, 128, 128, 80)
-    flops, params = profile(model, inputs=(input,))
-    macs, params = clever_format([flops, params], "%.3f")
-    print('模型参数：', params)
-    print('每一个样本浮点运算量：', macs)
-    print("VNet have {} paramerters in total".format(sum(x.numel() for x in model.parameters())))

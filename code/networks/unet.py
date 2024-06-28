@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- encoding: utf-8 -*-
-# @File   :  unet2d.py
+# @File   :  unet.py
 # @Time   :  2023/09/29 15:22:29
 # @Author :  zyd
 
@@ -50,14 +50,9 @@ class DownBlock(nn.Module):
 class UpBlock(nn.Module):
     """Upssampling followed by ConvBlock"""
 
-    # up_type=0: nn.ConvTranspose2d # 转置卷积 在input tensor的元素之间（横向、纵向）补0
-    # up_type=1: nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)双线性插值
-    # up_type=2: nn.Upsample(scale_factor=2, mode='nearest')最近邻插值
-
     def __init__(self, in_channels1, in_channels2, out_channels, dropout_p, mode_upsampling=1):
         super(UpBlock, self).__init__()
         self.mode_upsampling = mode_upsampling
-        # print('unet mode_upsampling={}'.format(mode_upsampling))
 
         if mode_upsampling == 0:
             self.up = nn.ConvTranspose2d(in_channels1, in_channels2, kernel_size=2, stride=2)
@@ -137,13 +132,6 @@ class Decoder(nn.Module):
         return output
 
 
-# ----------------------------------------------------------------------------------------
-# up_type=0: nn.ConvTranspose2d # 转置卷积 在input tensor的元素之间（横向、纵向）补0
-# up_type=1: nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)双线性插值
-# up_type=2: nn.Upsample(scale_factor=2, mode='nearest')最近邻插值
-# scale_factor：指定输出为输入的多少倍数；
-# ----------------------------------------------------------------------------------------
-
 class UNet(nn.Module):
     def __init__(self, in_chns, class_num, up_type=0):
         super(UNet, self).__init__()
@@ -153,8 +141,6 @@ class UNet(nn.Module):
                    'dropout': [0.05, 0.1, 0.2, 0.3, 0.5],
                    'class_num': class_num,
                    'up_type': up_type,
-                   # 'up_type': 1,
-                   # 'up_type': 2,
                    'acti_func': 'relu'}
 
         self.encoder = Encoder(params)
@@ -164,45 +150,3 @@ class UNet(nn.Module):
         feature = self.encoder(x)
         output1 = self.decoder(feature)
         return output1
-
-if __name__ == '__main__':
-    import torch
-    import torch.nn as nn
-    from torchvision import models
-
-    def to_numpy(tensor):
-        return tensor.detach().cpu().numpy()
-
-    unet_model = UNet(in_chns=4, class_num=4, up_type=0)
-    # 定义输入（假设输入大小为 (batch_size, channels, height, width)）
-    input_tensor = torch.randn((1, 4, 224, 224))
-    # 前向传播，获取倒数第二层的特征
-    features = unet_model.encoder(input_tensor)
-    output_features0 = unet_model.decoder.up1(features[4], features[3])
-    output_features1 = unet_model.decoder.up2(output_features0, features[2])
-    output_features2 = unet_model.decoder.up3(output_features1, features[1])
-    output_features3 = unet_model.decoder.up4(output_features2, features[0])
-    output_features4 = unet_model.decoder.out_conv(output_features3)
-    # print("Feature Shape:", features.shape)
-    # output_features = features[0]
-    output_feat0= to_numpy(output_features0)
-    output_feat1 = to_numpy(output_features1)
-    output_feat2 = to_numpy(output_features2)
-    output_feat3 = to_numpy(output_features3)
-    output_feat4 = to_numpy(output_features4)
-
-    # 打印某些层特征的形状
-    print("output_feat0 Shape:", output_feat0.shape)
-    print("output_feat1 Shape:", output_feat1.shape)
-    print("output_feat2 Shape:", output_feat2.shape)
-    print("output_feat3 Shape:", output_feat3.shape)
-    print("output_feat4 Shape:", output_feat4.shape)
-
-    """
-    output_feat0 Shape: (1, 128, 28, 28)
-    output_feat1 Shape: (1, 64, 56, 56)
-    output_feat2 Shape: (1, 32, 112, 112)
-    output_feat3 Shape: (1, 16, 224, 224) 
-    output_feat4 Shape: (1, 4, 224, 224) 
-    """
-
