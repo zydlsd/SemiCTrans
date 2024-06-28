@@ -1,5 +1,5 @@
 # coding=utf-8
-# This file borrowed from Swin-UNet: https://github.com/HuCaoFighting/Swin-Unet
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
