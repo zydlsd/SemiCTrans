@@ -21,7 +21,8 @@ This repository is based on PyTorch 0.4.1.
 4. Test the model.
 
 ## Acknowledgement
-[百度跳转](http://www.baidu.com/)
+[SSL4MIS](https://github.com/HiLab-git/SSL4MIS.git)
+
 This code is adapted from [SSL4MIS]("https://github.com/HiLab-git/SSL4MIS"). We thank all the authors for their contribution.
 ## Note for data
 We provided the processed h5 data in the data folder. You can refer the code in `code/data/brats2020/data_processing.py` to process your own data.
