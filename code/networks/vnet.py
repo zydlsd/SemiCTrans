@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 # -*- encoding: utf-8 -*-
-# @File   :  vnet.py
-# @Time   :  2023/09/29 15:13:08
-# @Author :  zyd
+
 
 import torch
 from torch import nn
