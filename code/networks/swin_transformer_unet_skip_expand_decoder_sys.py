@@ -5,8 +5,6 @@ from einops import rearrange
 from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 
 
-# 一些swinunet网络需要的卷积层
-
 class Mlp(nn.Module):
     def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.):
         super().__init__()
@@ -88,14 +86,14 @@ class WindowAttention(nn.Module):
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
-        coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
-        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
-        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
-        relative_coords[:, :, 0] += self.window_size[0] - 1  # shift to start from 0
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w])) 
+        coords_flatten = torch.flatten(coords, 1) 
+        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  
+        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  
+        relative_coords[:, :, 0] += self.window_size[0] - 1  
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
-        relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
+        relative_position_index = relative_coords.sum(-1) 
         self.register_buffer("relative_position_index", relative_position_index)
 
         self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
@@ -114,8 +112,7 @@ class WindowAttention(nn.Module):
         """
         B_, N, C = x.shape
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
-        q, k, v = qkv[0], qkv[1], qkv[2]  # make torchscript happy (cannot use tensor as tuple)
-
+        q, k, v = qkv[0], qkv[1], qkv[2]  
         q = q * self.scale
         attn = (q @ k.transpose(-2, -1))
 
