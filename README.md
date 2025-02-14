@@ -1,5 +1,5 @@
 ﻿## SemiCTrans: Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model and voxel-wise contrastive learning
-by Yudan Zhou, Jianfeng Bao, Congbo Cai, Zhong Chen, Shuhui Cai.
+by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, Shuhui Cai.
 
 <p align="center">
 <img src=""C:\Users\ydzho\Desktop\SemiCTrans.png"" width="700px"> 
