@@ -2,7 +2,7 @@
 by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, and Shuhui Cai
 
 <p align="center">
-<img src="SemiCTrans.png" width="700px"> 
+<img src="/SemiCTrans.png" width="700px"> 
 </p>
 
 
