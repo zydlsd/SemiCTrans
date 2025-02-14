@@ -2,7 +2,7 @@
 by Yudan Zhou, Jianfeng Bao, Congbo Cai, Zhong Chen, Shuhui Cai.
 
 <p align="center">
-<img src="" width="700px"> 
+<img src="C:\Users\ydzho\Desktop\TIM2修\TIM_拒稿重投\新修图表\Fig.2.tif" width="700px"> 
 </p>
 
 
