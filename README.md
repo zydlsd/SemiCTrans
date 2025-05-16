@@ -7,7 +7,7 @@ by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, and
 
 
 ## Introduction
-This is the officail code for "SemiCTrans: Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model and voxel-wise contrastive learning", code will be fully uploaded soon.
+This is the officail code for ["SemiCTrans: Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model and voxel-wise contrastive learning"](https://ieeexplore.ieee.org/document/11004024)
 
 ## Installation
 
