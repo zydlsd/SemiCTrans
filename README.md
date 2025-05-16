@@ -1,4 +1,4 @@
-﻿## Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model and voxel-wise contrastive learning
+﻿##:brain: Enhancing Semi-Supervised Brain Tumor Segmentation via Dual-Uncertainty Guided 2.5D CNN-Transformer and Voxel-Wise Contrastive Learning
 by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, and Shuhui Cai
 
 <p align="center">
@@ -7,11 +7,11 @@ by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, and
 
 
 ## Introduction
-This is the officail code for ["Semi-supervised brain tumor MRI segmentation via a dual-uncertainty guided CNN-Transformer 2.5D model and voxel-wise contrastive learning"](https://ieeexplore.ieee.org/document/11004024)
+:rocket: This is the officail code for ["Enhancing Semi-Supervised Brain Tumor Segmentation via Dual-Uncertainty Guided 2.5D CNN-Transformer and Voxel-Wise Contrastive Learning"](https://ieeexplore.ieee.org/document/11004024)
 
 ## Installation
 
-This repository is based on PyTorch 0.4.1.
+:wrench: This repository is based on PyTorch 0.4.1.
 
 ## Usage
 
