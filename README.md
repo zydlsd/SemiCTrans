@@ -23,5 +23,3 @@ by Yudan Zhou, Jianfeng Bao, Zhen Xing, Dairong Cao, Congbo Cai, Zhong Chen, and
 ## Acknowledgement
 This code is adapted from [SSL4MIS](https://github.com/HiLab-git/SSL4MIS.git). We thank all the authors for their contribution.
 
-## Questions
-Please contact: ydzhou@stu.xmu.edu.cn
